@@ -19,28 +19,28 @@ public class VendasApplication {
 
         return args -> {
             System.out.println("Salvando clientes");
-            repository.salvar(new Cliente("Lucas"));
-            repository.salvar(new Cliente("Erika"));
+            repository.save(new Cliente("Lucas"));
+            repository.save(new Cliente("Erika"));
 
             System.out.println("Listando clientes");
-            List<Cliente> todosClientes = repository.obterTodos();
+            List<Cliente> todosClientes = repository.findAll();
             todosClientes.forEach(System.out::println);
 
             System.out.println("Atualizando clientes");
             todosClientes.forEach(c -> {
                 c.setNome(c.getNome() + " atualizdo");
-                repository.atualizar(c);
+                repository.save(c);
             });
 
             System.out.println("Buscando clientes por nome");
-            repository.buscarPorNome("clie").forEach(System.out::println);
+            repository.findByNomeLike("clie").forEach(System.out::println);
 
             System.out.println("Deletando clientes");
-            repository.obterTodos().forEach(c -> {
-                repository.deletar(c);
+            repository.findAll().forEach(c -> {
+                repository.delete(c);
             });
 
-            todosClientes = repository.obterTodos();
+            todosClientes = repository.findAll();
             if (todosClientes.isEmpty()) {
                 System.out.println("Nenhum cliente encontrado");
             } else {
