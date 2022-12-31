@@ -1,37 +1,57 @@
-package io.github.lucasf1.vendas;
+package io.github.lucasf1;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import io.github.lucasf1.domain.entity.Cliente;
+import io.github.lucasf1.domain.repository.ClienteRepository;
 
 @SpringBootApplication
-@RestController
 public class VendasApplication {
 
-	@Value("${application.name}")
-	private String applicationName;
+    @Bean
+    public CommandLineRunner init(@Autowired ClienteRepository repository) {
 
-	@Gato
-	private Animal animal;
+        return args -> {
+            System.out.println("Salvando clientes");
+            repository.salvar(new Cliente("Lucas"));
+            repository.salvar(new Cliente("Erika"));
 
-	@Bean(name = "executarAnimal")
-	public CommandLineRunner executar() {
-		return args -> {
-			this.animal.fazerBarulho();
-		};
-	} 
+            System.out.println("Listando clientes");
+            List<Cliente> todosClientes = repository.obterTodos();
+            todosClientes.forEach(System.out::println);
 
-	@GetMapping("/hello")
-	public String hello(){
-		return applicationName;
-	}
+            System.out.println("Atualizando clientes");
+            todosClientes.forEach(c -> {
+                c.setNome( c.getNome() + " atualizdo");
+                repository.atualizar(c);
+            });
 
-	public static void main(String[] args) {
-		SpringApplication.run(VendasApplication.class, args);
-	}
+            System.out.println("Buscando clientes por nome");
+            repository.buscarPorNome("clie").forEach(System.out::println);
 
+            // System.out.println("Deletando clientes");
+            // repository.obterTodos().forEach(c -> {
+            //     repository.deletar(c);
+            // });
+
+            todosClientes = repository.obterTodos();
+            if (todosClientes.isEmpty()) {
+                System.out.println("Nenhum cliente encontrado");
+            } else {
+                todosClientes.forEach(System.out::println);
+            }
+
+
+        };
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(VendasApplication.class, args);
+    }
 }
