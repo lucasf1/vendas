@@ -28,17 +28,17 @@ public class VendasApplication {
 
             System.out.println("Atualizando clientes");
             todosClientes.forEach(c -> {
-                c.setNome( c.getNome() + " atualizdo");
+                c.setNome(c.getNome() + " atualizdo");
                 repository.atualizar(c);
             });
 
             System.out.println("Buscando clientes por nome");
             repository.buscarPorNome("clie").forEach(System.out::println);
 
-            // System.out.println("Deletando clientes");
-            // repository.obterTodos().forEach(c -> {
-            //     repository.deletar(c);
-            // });
+            System.out.println("Deletando clientes");
+            repository.obterTodos().forEach(c -> {
+                repository.deletar(c);
+            });
 
             todosClientes = repository.obterTodos();
             if (todosClientes.isEmpty()) {
@@ -46,7 +46,6 @@ public class VendasApplication {
             } else {
                 todosClientes.forEach(System.out::println);
             }
-
 
         };
     }
