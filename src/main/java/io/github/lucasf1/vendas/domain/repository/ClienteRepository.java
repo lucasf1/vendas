@@ -1,4 +1,4 @@
-package io.github.lucasf1.domain.repository;
+package io.github.lucasf1.vendas.domain.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.lucasf1.domain.entity.Cliente;
+import io.github.lucasf1.vendas.domain.entity.Cliente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 

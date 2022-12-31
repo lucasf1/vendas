@@ -1,4 +1,4 @@
-package io.github.lucasf1.domain.entity;
+package io.github.lucasf1.vendas.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

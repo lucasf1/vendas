@@ -1,4 +1,4 @@
-package io.github.lucasf1;
+package io.github.lucasf1.vendas;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import io.github.lucasf1.domain.entity.Cliente;
-import io.github.lucasf1.domain.repository.ClienteRepository;
+import io.github.lucasf1.vendas.domain.entity.Cliente;
+import io.github.lucasf1.vendas.domain.repository.ClienteRepository;
 
 @SpringBootApplication
 public class VendasApplication {
