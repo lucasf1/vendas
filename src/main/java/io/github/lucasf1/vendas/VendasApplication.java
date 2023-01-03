@@ -35,9 +35,9 @@ public class VendasApplication {
 
             Cliente cliente = clienteRepository.findClienteFetchPedidos(c1.getId());
             System.out.println(cliente);
-            // System.out.println(cliente.getPedidos());
+            System.out.println(cliente.getPedidos());
 
-            // pedidoRepository.findByCliente(c1).forEach(System.out::println);
+            pedidoRepository.findByCliente(c1).forEach(System.out::println);
         };
     }
 

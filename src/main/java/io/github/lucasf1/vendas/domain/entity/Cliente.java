@@ -33,6 +33,7 @@ public class Cliente {
     private String nome;
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Set<Pedido> pedidos;
 
     public Cliente(String nome) {

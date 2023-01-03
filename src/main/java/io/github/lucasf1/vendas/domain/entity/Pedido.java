@@ -34,6 +34,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @ToString.Exclude
     private Cliente cliente;
 
     @Column(name = "data_pedido")
@@ -43,5 +44,6 @@ public class Pedido {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "pedido")
+    @ToString.Exclude
     private List<ItemPedido> itens;
 }

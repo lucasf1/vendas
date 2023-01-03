@@ -29,6 +29,7 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
+    @ToString.Exclude
     private Pedido pedido;
 
     @ManyToOne
