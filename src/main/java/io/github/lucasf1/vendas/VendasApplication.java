@@ -1,5 +1,8 @@
 package io.github.lucasf1.vendas;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,44 +10,34 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import io.github.lucasf1.vendas.domain.entity.Cliente;
+import io.github.lucasf1.vendas.domain.entity.Pedido;
 import io.github.lucasf1.vendas.domain.repository.ClienteRepository;
+import io.github.lucasf1.vendas.domain.repository.PedidoRepository;
 
 @SpringBootApplication
 public class VendasApplication {
 
     @Bean
-    public CommandLineRunner init(@Autowired ClienteRepository repository) {
+    public CommandLineRunner init(
+            @Autowired ClienteRepository clienteRepository,
+            @Autowired PedidoRepository pedidoRepository) {
 
         return args -> {
             System.out.println("Salvando clientes");
-            repository.save(new Cliente("Lucas"));
-            repository.save(new Cliente("Erika"));
+            Cliente c1 = new Cliente("Lucas");
+            clienteRepository.save(c1);
 
-            // System.out.println("Listando clientes");
-            // List<Cliente> todosClientes = repository.findAll();
-            // todosClientes.forEach(System.out::println);
+            Pedido p = new Pedido();
+            p.setCliente(c1);
+            p.setDataPedido(LocalDate.now());
+            p.setTotal(BigDecimal.valueOf(100));
+            pedidoRepository.save(p);
 
-            // System.out.println("Atualizando clientes");
-            // todosClientes.forEach(c -> {
-            //     c.setNome(c.getNome() + " atualizdo");
-            //     repository.save(c);
-            // });
+            Cliente cliente = clienteRepository.findClienteFetchPedidos(c1.getId());
+            System.out.println(cliente);
+            // System.out.println(cliente.getPedidos());
 
-            System.out.println("Buscando clientes por nome");
-            repository.encontrarPorNome("%"+"ca"+"%").forEach(System.out::println);
-
-            // System.out.println("Deletando clientes");
-            // repository.findAll().forEach(c -> {
-            //     repository.delete(c);
-            // });
-
-            // todosClientes = repository.findAll();
-            // if (todosClientes.isEmpty()) {
-            //     System.out.println("Nenhum cliente encontrado");
-            // } else {
-            //     todosClientes.forEach(System.out::println);
-            // }
-
+            // pedidoRepository.findByCliente(c1).forEach(System.out::println);
         };
     }
 

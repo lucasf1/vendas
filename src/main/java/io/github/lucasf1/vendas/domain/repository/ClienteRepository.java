@@ -11,15 +11,16 @@ import io.github.lucasf1.vendas.domain.entity.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    @Query(value = "select * from cliente where nome like '%:nome%'", nativeQuery = true)
+    @Query(value = "select * from Cliente where nome like '%:nome%'", nativeQuery = true)
     List<Cliente> encontrarPorNome(@Param("nome") String nome);
 
-    @Query(value = "delete from cliente where nome = :nome")
+    @Query(value = "delete from Cliente where nome = :nome")
     @Modifying
     void deleteByNome(String nome);
 
-    List<Cliente> findByNomeLike(String nome);
-
     boolean existsByNome(String nome);
+
+    @Query(value = "select c from Cliente c left join fetch c.pedidos where c.id = :id")
+    Cliente findClienteFetchPedidos(@Param("id") Integer id);
 
 }
