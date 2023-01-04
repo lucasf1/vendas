@@ -2,6 +2,8 @@ package io.github.lucasf1.vendas.domain.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,6 +34,10 @@ public class Cliente {
     @Column(name="nome", length = 100)
     private String nome;
 
+    @Column(name="cpf", length = 11)
+    private String cpf;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<Pedido> pedidos;
