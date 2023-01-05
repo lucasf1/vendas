@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ###
-get {{baseUrl}}
+get {{baseUrl}}?nome=fu
