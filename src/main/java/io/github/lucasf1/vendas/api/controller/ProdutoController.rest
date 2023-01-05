@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080/api/produtos
+
+###
+post {{baseUrl}}
+Content-Type: application/json
+
+{
+    "descricao": "Mouse Gamer",
+    "preco": 150
+}
+
+###
+get {{baseUrl}}/3
+
+###
+put {{baseUrl}}/3
+Content-Type: application/json
+
+{
+    "descricao": "Mouse Gamer II",
+    "preco": 200
+}
+
+###
+delete {{baseUrl}}/3
+
+###
+get {{baseUrl}}?nome=si
+
+###
+delete {{baseUrl}}/1
