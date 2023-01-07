@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.github.lucasf1.vendas.api.dto.AtualizacaoStatusPedidoDTO;
 import io.github.lucasf1.vendas.api.dto.InformacaoItemPedidoDTO;
 import io.github.lucasf1.vendas.api.dto.InformacoesPedidoDTO;
 import io.github.lucasf1.vendas.api.dto.PedidoDTO;
 import io.github.lucasf1.vendas.domain.entity.ItemPedido;
 import io.github.lucasf1.vendas.domain.entity.Pedido;
+import io.github.lucasf1.vendas.domain.enums.StatusPedido;
 import io.github.lucasf1.vendas.service.PedidoService;
 
 @RestController
@@ -59,6 +62,7 @@ public class PedidoController {
                 .cpf(pedido.getCliente().getCpf())
                 .nomeCliente(pedido.getCliente().getNome())
                 .total(pedido.getTotal())
+                .status(pedido.getStatus().name())
                 .items(converter(pedido.getItens()))
                 .build();
     }
@@ -78,5 +82,15 @@ public class PedidoController {
                         .build())
                 .collect(Collectors.toList());
 
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(
+            @PathVariable Integer id,
+            @RequestBody AtualizacaoStatusPedidoDTO dto) {
+        
+        String novoStatus = dto.novoStatus();
+        service.atualizarStatus(id, StatusPedido.valueOf(novoStatus));
     }
 }

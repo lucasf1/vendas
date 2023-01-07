@@ -17,3 +17,11 @@ Content-Type: application/json
 
 ### 
 get {{baseUrl}}/1
+
+###
+patch {{baseUrl}}/1
+Content-Type: application/json
+
+{
+    "novoStatus": "CANCELADO"
+}

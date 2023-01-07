@@ -12,6 +12,7 @@ public record InformacoesPedidoDTO(
         String nomeCliente,
         BigDecimal total,
         String dataPedido,
+        String status,
         List<InformacaoItemPedidoDTO> items) {
 
 }

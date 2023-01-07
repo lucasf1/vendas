@@ -14,10 +14,12 @@ import io.github.lucasf1.vendas.domain.entity.Cliente;
 import io.github.lucasf1.vendas.domain.entity.ItemPedido;
 import io.github.lucasf1.vendas.domain.entity.Pedido;
 import io.github.lucasf1.vendas.domain.entity.Produto;
+import io.github.lucasf1.vendas.domain.enums.StatusPedido;
 import io.github.lucasf1.vendas.domain.repository.ClienteRepository;
 import io.github.lucasf1.vendas.domain.repository.ItemPedidoRepository;
 import io.github.lucasf1.vendas.domain.repository.PedidoRepository;
 import io.github.lucasf1.vendas.domain.repository.ProdutoRepository;
+import io.github.lucasf1.vendas.exception.PedidoNaoEncontradoException;
 import io.github.lucasf1.vendas.exception.RegraNegocioException;
 import io.github.lucasf1.vendas.service.PedidoService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
-        
+
         return repository.findByIdFetchItens(id);
     }
 
@@ -49,6 +51,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.total());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItens(pedido, dto.items());
         repository.save(pedido);
@@ -70,7 +73,7 @@ public class PedidoServiceImpl implements PedidoService {
                     Produto produto = produtoRepository
                             .findById(idProduto)
                             .orElseThrow(
-                                () -> new RegraNegocioException("Código de produto inválido: " + idProduto));
+                                    () -> new RegraNegocioException("Código de produto inválido: " + idProduto));
 
                     ItemPedido itemPedido = new ItemPedido();
                     itemPedido.setQuantidade(dto.quantidade());
@@ -81,5 +84,16 @@ public class PedidoServiceImpl implements PedidoService {
                 }).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
+    public void atualizarStatus(Integer id, StatusPedido statusPedido) {
+
+        repository.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                })
+                .orElseThrow(() -> new PedidoNaoEncontradoException());
+    }
 
 }
