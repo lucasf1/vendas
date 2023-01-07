@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:8080/api/pedidos
+
+###
+post {{baseUrl}}
+Content-Type: application/json
+
+{
+    "cliente": 1,
+    "total": 1500,
+    "items": [
+        {
+            "produto": 1,
+            "quantidade": 10
+        }
+    ]    
+}
+
+### 
+get {{baseUrl}}/1
