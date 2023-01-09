@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "nome": "Fulano de Tal",
-    "cpf": "11111111111"
+    "cpf": "71725437007"
 }
 
 ###
