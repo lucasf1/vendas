@@ -7,13 +7,13 @@ import io.github.lucasf1.vendas.validation.NotEmptyList;
 import jakarta.validation.constraints.NotNull;
 
 public record PedidoDTO(
-    @NotNull(message = "Informe o nome do cliente.") 
+    @NotNull(message = "{campo.codigo-cliente.obrigatorio}") 
     Integer cliente, 
 
-    @NotNull(message = "Campo total do pedido é obrigatório.")
+    @NotNull(message = "{campo.total-pedido.obrigatorio}")
     BigDecimal total,
 
-    @NotEmptyList(message = "O pedido deve ter itens.")     
+    @NotEmptyList(message = "{campo.items-pedido.obrigatorio}")     
     List<ItemPedidoDTO> items) {
     
 }
