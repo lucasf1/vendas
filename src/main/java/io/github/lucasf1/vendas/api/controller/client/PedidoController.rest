@@ -5,7 +5,7 @@ post {{baseUrl}}
 Content-Type: application/json
 
 {
-    
+    "cliente": 1,
     "total": 1500,
     "items": [
         {
