@@ -1,8 +1,10 @@
 @baseUrl = http://localhost:8080/api/pedidos
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhcyIsImlzcyI6IkFQSSBWZW5kYXMiLCJleHAiOjE2NzU3MTgxODB9.O8ksTdTThOuSeqq0i5V95p8fEkkXE80g-xgNfrFf1mI
 
 ###
 post {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "cliente": 1,
@@ -12,15 +14,17 @@ Content-Type: application/json
             "produto": 1,
             "quantidade": 10
         }
-    ]    
+    ]
 }
 
-### 
+###
 get {{baseUrl}}/1
+Authorization: Bearer {{token}}
 
 ###
 patch {{baseUrl}}/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "novoStatus": "CANCELADO"

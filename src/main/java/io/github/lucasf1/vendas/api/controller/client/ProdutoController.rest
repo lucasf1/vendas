@@ -1,8 +1,10 @@
 @baseUrl = http://localhost:8080/api/produtos
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhcyIsImlzcyI6IkFQSSBWZW5kYXMiLCJleHAiOjE2NzU3MTgxODB9.O8ksTdTThOuSeqq0i5V95p8fEkkXE80g-xgNfrFf1mI
 
 ###
 post {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "descricao": "Mouse Gamer",
@@ -11,10 +13,13 @@ Content-Type: application/json
 
 ###
 get {{baseUrl}}/1
+Authorization: Bearer {{token}}
+
 
 ###
 put {{baseUrl}}/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "descricao": "Mouse Gamer II",
@@ -23,6 +28,8 @@ Content-Type: application/json
 
 ###
 get {{baseUrl}}?descricao=Gam
+Authorization: Bearer {{token}}
 
 ###
 delete {{baseUrl}}/1
+Authorization: Bearer {{token}}

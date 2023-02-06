@@ -1,8 +1,10 @@
 @baseUrl = http://localhost:8080/api/clientes
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhcyIsImlzcyI6IkFQSSBWZW5kYXMiLCJleHAiOjE2NzU3MTgxODB9.O8ksTdTThOuSeqq0i5V95p8fEkkXE80g-xgNfrFf1mI
 
 ###
 post {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "nome": "Fulano de Tal",
@@ -11,13 +13,16 @@ Content-Type: application/json
 
 ###
 get {{baseUrl}}/2
+Authorization: Bearer {{token}}
 
 ###
 delete {{baseUrl}}/1
+Authorization: Bearer {{token}}
 
 ###
 put {{baseUrl}}/2
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "nome": "Sicrano de Mal"
@@ -25,3 +30,4 @@ Content-Type: application/json
 
 ###
 get {{baseUrl}}?nome=si
+Authorization: Bearer {{token}}
