@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8080/api/clientes
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhcyIsImlzcyI6IkFQSSBWZW5kYXMiLCJleHAiOjE2NzU3MTgxODB9.O8ksTdTThOuSeqq0i5V95p8fEkkXE80g-xgNfrFf1mI
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWNhcyIsImlzcyI6IkFQSSBWZW5kYXMiLCJleHAiOjE2NzYyMzAxMTN9.i4ZqGq2l2sv_IWb1NvJQ8c30ZNfIs8xojk6LWTbif7Q
 
 ###
 post {{baseUrl}}

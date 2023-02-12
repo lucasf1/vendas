@@ -1,5 +1,7 @@
 package io.github.lucasf1.vendas.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import io.github.lucasf1.vendas.api.dto.CredenciaisDTO;
 import io.github.lucasf1.vendas.api.dto.DadosCadastroUsuario;
 import io.github.lucasf1.vendas.api.dto.TokenDTO;
 import io.github.lucasf1.vendas.domain.entity.Usuario;
+import io.github.lucasf1.vendas.domain.repository.UsuarioRepository;
 import io.github.lucasf1.vendas.service.TokenService;
 import io.github.lucasf1.vendas.service.impl.UsuarioServiceImpl;
 import jakarta.validation.Valid;
@@ -29,6 +33,9 @@ public class UsuarioController {
     private UsuarioServiceImpl usuarioService;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -36,6 +43,11 @@ public class UsuarioController {
 
     @Autowired
     private TokenService tokenService;
+
+    @GetMapping
+    public List<Usuario> getUsuarios() {
+        return usuarioRepository.findAll();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
